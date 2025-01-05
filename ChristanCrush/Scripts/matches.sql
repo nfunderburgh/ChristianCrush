@@ -1,0 +1,8 @@
+﻿CREATE TABLE Matches (
+    MatchId INT AUTO_INCREMENT PRIMARY KEY,
+    UserId1 INT NOT NULL,
+    UserId2 INT NOT NULL,
+    MatchedAt TIMESTAMP,
+    FOREIGN KEY (UserId1) REFERENCES Users(Id),
+    FOREIGN KEY (UserId2) REFERENCES Users(Id)
+);

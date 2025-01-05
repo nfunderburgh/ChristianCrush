@@ -1,0 +1,36 @@
+﻿@model ChristanCrush.Models.ProfileModel
+
+@{
+    string image1Base64 = Model.Image1Data != null ? Convert.ToBase64String(Model.Image1Data) : null;
+}
+
+<div class="card"  style="width: 17rem; margin:5px;">   
+    <div class="card-body">
+        <h5 class="card-title">@Model.FullName</h5>
+       
+            @if (!string.IsNullOrEmpty(image1Base64))
+            {
+                <div class="mb-3 d-flex justify-content-center">
+                    <img src="data:image/jpeg;base64,@image1Base64" alt="Profile Image" class="img-fluid rounded" />
+                </div>
+            }
+            <div class="row g-1">
+            <div class="col-8">
+                <form method="post" asp-controller="Message" asp-action="Index" class="mb-2">
+                    <input type="hidden" name="matchUserId" value="@Model.UserId" />
+                    <button type="submit" class="btn btn-primary w-100">Message</button>
+                </form>
+            </div>
+            <div class="col-4">
+            <form method="post" asp-controller="Match" asp-action="DeleteMatch" onsubmit="return confirmDelete()" class="mb-2"> 
+                <input type="hidden" name="matchUserId" value="@Model.UserId" />
+                <button type="submit" class="btn btn-danger w-100">Delete</button>
+            </form>
+            </div>
+            </div>
+
+        @*<button type="button" class="btn btn-primary edit-product-button" value="@Model.Id" data-bs-toggle="modal" data-bs-target="#editForm">
+            Launch demo modal
+        </button>*@
+    </div>
+</div>
